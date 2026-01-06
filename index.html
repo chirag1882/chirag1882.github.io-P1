@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chirag | Web Developer</title>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Bangers (Comic Headers), Permanent Marker (Graffiti), Roboto Mono (Tech text) -->
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- GLOBAL VARIABLES & RESET --- */
+        :root {
+            --spider-red: #ff0055;
+            --spider-blue: #00d4ff;
+            --comic-yellow: #ffcc00;
+            --ink-black: #111111;
+            --paper-white: #ffffff;
+            --shadow-offset: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto Mono', monospace;
+            background-color: #ff9100; /* Vibrant Orange Base */
+            
+            /* CSS-Generated Halftone Pattern (Comic Dots) */
+            background-image: 
+                radial-gradient(circle, rgba(0,0,0,0.15) 20%, transparent 20%), 
+                radial-gradient(circle, rgba(0,0,0,0.15) 20%, transparent 20%);
+            background-size: 10px 10px;
+            background-position: 0 0, 5px 5px;
+
+            color: var(--ink-black);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden; /* Prevent horizontal scroll from skewed elements */
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3 {
+            font-family: 'Bangers', cursive;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-align: center;
+            margin: 0;
+            /* Comic Text Shadow Effect */
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.2); 
+        }
+
+        h1 {
+            font-size: 5rem;
+            color: var(--paper-white);
+            -webkit-text-stroke: 2px var(--ink-black);
+            text-shadow: 5px 5px 0px var(--ink-black);
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            background: var(--ink-black);
+            color: var(--spider-blue);
+            padding: 5px 20px;
+            transform: skewX(-5deg); /* Dynamic tilt */
+            box-shadow: 5px 5px 0px var(--spider-red);
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        /* --- LAYOUT SECTIONS --- */
+        header, section, footer {
+            width: 90%; /* Responsive width */
+            max-width: 1400px; /* Cap width for large screens */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 4rem 1rem;
+        }
+
+        /* --- HEADER AREA --- */
+        header {
+            padding-top: 6rem;
+            padding-bottom: 2rem;
+        }
+
+        .subtitle {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.5rem;
+            background-color: var(--ink-black);
+            color: var(--spider-red);
+            padding: 5px 15px;
+            transform: rotate(-2deg);
+        }
+
+        /* --- ABOUT ME (Comic Box) --- */
+        .comic-box {
+            background-color: var(--paper-white);
+            border: 4px solid var(--ink-black);
+            box-shadow: 12px 12px 0px var(--ink-black);
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 900px;
+            position: relative;
+            text-align: left; /* Reading text should be left-aligned */
+        }
+
+        /* The little triangle for the speech bubble look */
+        .comic-box::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 20px 20px 0;
+            border-style: solid;
+            border-color: var(--ink-black) transparent;
+            display: none; /* Hidden unless you want it to look like a speech bubble */
+        }
+
+        .comic-box p {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        /* --- SKILLS (Cloud) --- */
+        .skills-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 1000px;
+        }
+
+        .skill-item {
+            background: var(--ink-black);
+            color: var(--comic-yellow);
+            padding: 12px 24px;
+            font-size: 1.2rem;
+            border: 3px solid var(--ink-black);
+            font-weight: bold;
+            box-shadow: 6px 6px 0px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+            cursor: default;
+        }
+
+        /* Random rotations for organic feel */
+        .skill-item:nth-child(odd) { transform: rotate(-2deg); }
+        .skill-item:nth-child(even) { transform: rotate(2deg); }
+
+        .skill-item:hover {
+            transform: scale(1.1) rotate(0deg);
+            background: var(--spider-blue);
+            color: var(--ink-black);
+        }
+
+        /* --- PROJECTS (Glitch/Graffiti Style) --- */
+        .project-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 3rem;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        /* Glitch Card Container */
+        .glitch-card {
+            background: rgba(17, 17, 17, 0.9); /* Dark semi-transparent */
+            border: 2px solid var(--spider-blue);
+            padding: 2rem;
+            width: 320px; /* Fixed width for consistency */
+            position: relative;
+            transform: skewX(-5deg); /* The speed slant */
+            box-shadow: 10px 10px 0px var(--spider-red);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Un-skew text so it's readable */
+        .glitch-content, .view-link {
+            transform: skewX(5deg);
+        }
+
+        .glitch-content h3 {
+            color: var(--paper-white);
+            font-size: 2rem;
+            text-shadow: 2px 2px var(--spider-red);
+            text-align: left;
+        }
+
+        .glitch-content p {
+            color: #ddd;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        .tech-stack {
+            color: var(--spider-blue);
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-top: 1rem;
+            text-transform: uppercase;
+            text-align: left;
+        }
+
+        .view-link {
+            display: inline-block;
+            margin-top: 1.5rem;
+            color: var(--ink-black);
+            text-decoration: none;
+            font-weight: bold;
+            background: var(--spider-red);
+            padding: 8px 16px;
+            border: 2px solid var(--paper-white);
+            text-align: center;
+            align-self: flex-start;
+        }
+
+        /* Hover Effect for Card */
+        .glitch-card:hover {
+            transform: skewX(0deg) scale(1.05);
+            background: var(--ink-black);
+            box-shadow: 0px 0px 20px var(--spider-blue);
+            z-index: 10;
+        }
+
+        /* The GitHub Link Button (Styled to match) */
+        .github-main-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            background-color: var(--paper-white);
+            border: 3px solid var(--ink-black);
+            padding: 15px 30px;
+            margin-top: 3rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--ink-black);
+            box-shadow: 6px 6px 0px var(--ink-black);
+            transition: all 0.2s;
+            transform: rotate(-1deg);
+        }
+
+        .github-main-link:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 9px 9px 0px var(--spider-blue);
+        }
+
+        /* --- SOCIALS --- */
+        .social-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .social-card {
+            width: 60px;
+            height: 60px;
+            background: var(--ink-black);
+            color: var(--paper-white);
+            border-radius: 50%; /* Circle */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            text-decoration: none;
+            border: 3px solid var(--ink-black);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy */
+        }
+
+        .social-card:hover {
+            background: var(--paper-white);
+            color: var(--spider-red);
+            transform: translateY(-10px) scale(1.1);
+            border-color: var(--spider-red);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding-bottom: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* --- RESPONSIVE ADJUSTMENTS --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 3.5rem; }
+            h2 { font-size: 2.5rem; }
+            
+            .comic-box {
+                padding: 1.5rem;
+            }
+            
+            .glitch-card {
+                width: 100%; /* Cards take full width on mobile */
+                transform: skewX(0deg); /* Remove skew on mobile for readability */
+                margin-bottom: 1rem;
+            }
+            
+            .glitch-content, .view-link {
+                transform: skewX(0deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>HI, I'M CHIRAG</h1>
+        <div class="subtitle">Developer | Designer | Lifelong Learner</div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>ABOUT ME</h2>
+        <div class="comic-box">
+            <p>
+                Hello! Chirag Yadav this side. I am currently pursuing my bachelor's degree in Computer Science from SRM University, Delhi-NCR.
+            </p>
+            <p>
+                I am passionate about the field of technology... to be precise, it's <strong>AI</strong> that has occupied my mind. All the stories about AI taking over the world (are they really just stories? 👀) fascinate me to build the future.
+            </p>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2>MY SUPERPOWERS</h2>
+        <div class="skills-cloud">
+            <span class="skill-item">C Programming</span>
+            <span class="skill-item">HTML & CSS</span>
+            <span class="skill-item">Computer Architecture</span>
+            <span class="skill-item">Python</span>
+            <span class="skill-item">Git/GitHub</span>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2>MISSION LOG</h2>
+        
+        <div class="project-grid">
+            <!-- Project 3 (Placeholder) -->
+            <div class="glitch-card">
+                <div class="glitch-content">
+                    <h3>PORTFOLIO V1</h3>
+                    <p>This website! Built with high-contrast comic aesthetics.</p>
+                    <div class="tech-stack">HTML5 // CSS3</div>
+                </div>
+                <a href="#" class="view-link">SELF REF -></a>
+            </div>
+
+        </div>
+
+        <!-- The GitHub Link you requested -->
+        <a href="https://github.com/chirag1882?tab=repositories" target="_blank" class="github-main-link">
+            <i class="fab fa-github"></i>
+            <span>ACCESS FULL ARCHIVE</span>
+        </a>
+    </section>
+
+    <!-- Socials Section -->
+    <section id="socials">
+        <h2>SIGNAL ME</h2>
+        <div class="social-container">
+            <a href="https://x.com/chiragyadav1882" target="_blank" class="social-card">
+                <i class="fab fa-twitter"></i>
+            </a>
+
+            <a href="https://instagram.com/chiraggg.y" target="_blank" class="social-card">
+                <i class="fab fa-instagram"></i>
+            </a>
+
+            <a href="https://www.linkedin.com/in/chirag1882/" target="_blank" class="social-card">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            
+            <a href="mailto:chiragyadavm17@gmail.com" class="social-card">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Chirag Yadav. Crafted with 🕸️ and Code.</p>
+    </footer>
+
+</body>
+</html>
